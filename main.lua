@@ -1,4 +1,43 @@
-name = "monitor_2"
+print("\nSTARTUP> starting up... ")
+
+--copying all file to the virtual computer (for development)
+mounter.mount("rom/aros", "")
+mounter.mount("storage", "")
+
+
+--defining monitor labels
+main_monitor = "main_monitor"
+
+
+--emulating monitors (for developement)
+periphemu.create(main_monitor, "monitor")
+print("STARTUP> attached",main_monitor)
+
+
+--import all modules
+local gui = require("rom/aros/gui")
+local variables = require("rom/aros/variables")
+
+
+--the program:
+gui.init()      --setting all screens on default
+assert(variables.save("test.lua"), "ERROR")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 --defining usefull functions here:
 function pos(...) return term.setCursorPos(...) end
