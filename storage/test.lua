@@ -1,7 +1,7 @@
 return {
-    ["n_flux"] = 1000,
-    ["reactivity"] = 1000,
-    ["pressure"] = 873,
-    ["temperature"] = 9911,
-    ["flow_1"] = 09742,
+    ["flow_1"] = 200,
+    ["reactivity"] = 0,
+    ["n_flux"] = 0,
+    ["pressure"] = 0,
+    ["temperature"] = 0,
 }

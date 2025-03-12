@@ -69,12 +69,7 @@ local function init()
 
 
 
-
-
-
-
-
-
+        term.redirect(term.native()) -- returns to the primary console prompt
 
     else print("-> monitor",name,"was not found")
     end

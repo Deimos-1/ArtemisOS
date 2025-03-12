@@ -18,8 +18,8 @@ print("STARTUP> attached",main_monitor)
 --import all modules
 local gui = require("rom/aros/gui")
 local variables = require("rom/aros/variables")
+local listener = require("rom/aros/listener")
 
 
 --the program:
-gui.init()      --setting all screens on default
-variables.load("test.lua")
+parallel.waitForAny(gui.init(), listener.listenForCmd())     --setting all screens on default
