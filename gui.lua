@@ -6,10 +6,9 @@ function bCol(...) return term.setBackgroundColor(...) end
 function box(...) return paintutils.drawFilledBox(...) end
 function line(...) return paintutils.drawLine(...) end
 
+--importing the variables
+local variables = require("rom/aros/variables")
 
-
---TO DO:
--- custom print (given a variable and space available)
 
 local function cprint(title, value, unit, space)
     title = title or ""
@@ -29,8 +28,6 @@ local function cprint(title, value, unit, space)
     assert(type(value) == "number", "ERROR> Provided length is NaN")
 
     string = string.format("%s%s%.2f%s%s", title, string.rep(" ",interval_1+interval_2), value, string.rep(" ",interval_3), unit)
-
-    --assert(string.len(string) <= space, "ERROR> Text is longer than provided space")
     print(string)
 end
 
@@ -57,19 +54,20 @@ local function init()
     
         --variables
         term.setCursorPos(3,3)
-        cprint("Reactivity:",0,"[%]")
+        cprint("Reactivity:",variables.v.reactivity,"[%]")
         term.setCursorPos(3,4)
-        cprint("Neutron flux:",0,"[%n]")
+        cprint("Neutron flux:",variables.v.n_flux,"[%n]")
         term.setCursorPos(3,5)
-        cprint("Temperature:",0,"[C]")
+        cprint("Temperature:",variables.v.temperature,"[C]")
         term.setCursorPos(3,6)
-        cprint("Pressure:",0,"[kPa]")
+        cprint("Pressure:",variables.v.pressure,"[kPa]")
         term.setCursorPos(3,7)
-        cprint("Primary flow:",0,"[m3/s]")
+        cprint("Primary flow:",variables.v.flow_1,"[m3/s]")
 
 
 
         term.redirect(term.native()) -- returns to the primary console prompt
+        print(variables.v.temperature)
 
     else print("-> monitor",name,"was not found")
     end

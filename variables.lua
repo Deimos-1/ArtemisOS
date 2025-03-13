@@ -1,3 +1,5 @@
+--TO DO: 
+--  - assert the load file is present
 
 -- all variables are kept in this table:
 v = {
@@ -35,10 +37,13 @@ end
 
 
 function load(filename)
-    v = dofile(string.format("storage/%s", filename))
+    --updating v 'in-place' so other files have access to the new data:
+    for k, val in pairs(dofile(string.format("storage/%s", filename))) do
+        v[k] = val
+    end
 end
 
 
 return {
-    var = v, save = save, load = load
+    v = v, save = save, load = load
 }
