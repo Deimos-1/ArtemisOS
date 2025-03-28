@@ -1,7 +1,7 @@
 --TO DO: 
 --  - assert the load file is present
 
--- all variables are kept in this table:
+-- all reactor variables are kept in this table:
 v = {
     reactivity = 0,
     n_flux = 0,
@@ -9,6 +9,8 @@ v = {
     pressure = 0,
     flow_1 = 0
 }
+-- programm variables are handled separately:
+running = false
 
 function save(filename)
     file, err = io.open(string.format("storage/%s", filename), "w+") --All existing data is removed if file exists or new file is created with read write permissions.
@@ -36,6 +38,11 @@ function save(filename)
 end 
 
 
+function tick()
+    -- (...)
+end
+
+
 function load(filename)
     --updating v 'in-place' so other files have access to the new data:
     for k, val in pairs(dofile(string.format("storage/%s", filename))) do
@@ -45,5 +52,5 @@ end
 
 
 return {
-    v = v, save = save, load = load
+    v = v, save = save, load = load, running = running
 }

@@ -67,7 +67,6 @@ local function init()
 
 
         term.redirect(term.native()) -- returns to the primary console prompt
-        print(variables.v.temperature)
 
     else print("-> monitor",name,"was not found")
     end

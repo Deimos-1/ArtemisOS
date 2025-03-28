@@ -1,27 +1,28 @@
 print("\nSTARTUP> starting up... ")
 
---defining monitor labels
+-- defining monitor labels
 main_monitor = "main_monitor"
---copying all file to the virtual computer (for development)
---file path depends on your local installation...
+
+-- copying all file to the virtual computer (for development)
+-- the path depends on your local installation !!!
 mounter.mount("rom/aros", "C:\\Users\\Public\\ArtemisOS")
 mounter.mount("storage", "C:\\Users\\Public\\ArtemisOS\\storage")
---emulating monitors (for developement)
+
+-- emulating monitors (for developement)
 periphemu.create(main_monitor, "monitor")
 print("STARTUP> attached",main_monitor)
 
-
---import all modules
+-- import all modules
 local gui = require("rom/aros/gui")
 local variables = require("rom/aros/variables")
 local listener = require("rom/aros/listener")
 
 
 local function main()
-    
-
+    -- (...)
+    sleep(1) -- the simulation will run at 1 FPS
 end
 
 
 --the program:
-parallel.waitForAny(main(), listener.listenForCmd())     --setting all screens on default
+parallel.waitForAny(main(), listener.listenForCmd())     -- setting all screens on default

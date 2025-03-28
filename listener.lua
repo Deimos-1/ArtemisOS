@@ -21,6 +21,7 @@ function listenForCommands()
         local input = read() 
         local split = splitBySpaces(input)
 
+        -- Save command
         if split[1] == "save"  then -- INDEXING STARTS @ 1
             if split[2] ~= nil then
                 variables.save(split[2])
@@ -29,7 +30,7 @@ function listenForCommands()
                 print("ERROR> No filename provided. Usage: \nsave [filename.lua]")
             end
                 
-
+        -- Load command
         elseif split[1] == "load" then
             if split[2] ~= nil then
                 variables.load(split[2])
@@ -38,12 +39,13 @@ function listenForCommands()
                 print("ERROR> No filename provided. Usage: \nload [filename.lua]")
             end
 
-
+        -- Reboot comand
         elseif split[1] == "reboot" then
             os.reboot()
 
-        
+        -- GUI commands
         elseif split[1] == "gui" then
+            -- initialization
             if split[2] == "init" then 
                 gui.init()
                 print("AROS> initialized the GUI")
@@ -51,10 +53,39 @@ function listenForCommands()
                 print("ERROR> correct usage: gui [init]")
             end
 
-        else 
-            print("ERROR> invalid command. Valid commands are: \n - save [filename.lua] \n - load [filename.lua] \n - reboot\n - gui [init]") 
-        end
+        -- Freeze command
+        elseif split[1] == "freeze" then
+            if running == false then
+                print("AROS> the simulation is already frozen")
+            else
+                running = false
+                print("AROS> the simulation is now frozen")
+            end
 
+        -- Resume command
+        elseif split[1] == "resume" then
+        if running == true then
+            print("AROS> the simulation is already ticking")
+        else
+            running = true
+            print("AROS> the simulation resumed")
+        end
+        
+
+        else 
+            print(
+[[
+ERROR> invalid command. Valid commands are:
+    - save [filename.lua]
+    - load [filename.lua]
+    - reboot
+    - gui [init]
+    - freeze
+    - resume
+]]
+            )
+                
+        end
     end
 end
 
