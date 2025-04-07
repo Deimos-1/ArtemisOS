@@ -3,11 +3,14 @@
 
 -- all reactor variables are kept in this table:
 v = {
-    reactivity = 0,
-    n_flux = 0,
-    temperature = 0,
-    pressure = 0,
-    flow_1 = 0
+    reactivity = 1000,
+    n_flux = 1000,
+    temperature = 100,
+    pressure = 10000,
+    flow_1 = 10000,
+    power_defect = 10,
+    T_cold = 100,
+    thermal_power = 1000
 }
 -- programm variables are handled separately:
 running = false
@@ -38,8 +41,15 @@ function save(filename)
 end 
 
 
-function tick()
-    -- (...)
+function tick() -- code taken from the python simulation, which worked quite well
+    v.n_flux = v.n_flux + (v.reactivity - v.power_defect)
+    -- non-negativity check: 
+    if v.n_flux < 0 then v.n_flux = 0 end
+    -- non-zero flow check: 
+    if v.flow_1 == 0 then v.flow_1 = 0.01 end
+    -- then the the following won't devide by 0: 
+    v.temperature = v.T_cold + v.thermal_power * 1000000 / v.flow_1 / 4180
+    --The nominal thermal power is around 3000 MWh corresponding to a temperature of 350°C and a primary flow of 16 m3/s
 end
 
 
@@ -52,5 +62,5 @@ end
 
 
 return {
-    v = v, save = save, load = load, running = running
+    v = v, save = save, load = load, running = running, tick = tick
 }

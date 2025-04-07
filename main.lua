@@ -19,10 +19,15 @@ local listener = require("rom/aros/listener")
 
 
 local function main()
-    -- (...)
-    sleep(1) -- the simulation will run at 1 FPS
+    while true do
+        if variables.running == true then
+            variables.tick()
+            print("tick")  -- NOT SHOWING UP !! 
+        end
+        sleep(1) -- the simulation will run at 1 FPS
+    end
 end
 
 
 --the program:
-parallel.waitForAny(main(), listener.listenForCmd())     -- setting all screens on default
+parallel.waitForAny(main, listener.listenForCmd)     -- setting all screens on default
