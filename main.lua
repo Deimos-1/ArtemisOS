@@ -22,7 +22,7 @@ local function main()
     while true do
         if variables.running == true then
             variables.tick()
-            print("tick")  -- NOT SHOWING UP !! 
+            gui.init() -- rebooting the whole display until gui.update() is implemented
         end
         sleep(1) -- the simulation will run at 1 FPS
     end

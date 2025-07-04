@@ -55,19 +55,19 @@ function listenForCommands()
 
         -- Freeze command
         elseif split[1] == "freeze" then
-            if running == false then
+            if variables.running == false then
                 print("AROS> the simulation is already frozen")
             else
-                running = false
+                variables.running = false
                 print("AROS> the simulation is now frozen")
             end
 
         -- Resume command
         elseif split[1] == "resume" then
-        if running == true then
+        if variables.running == true then
             print("AROS> the simulation is already ticking")
         else
-            running = true
+            variables.running = true
             print("AROS> the simulation resumed")
         end
         

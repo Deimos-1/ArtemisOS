@@ -43,13 +43,20 @@ end
 
 function tick() -- code taken from the python simulation, which worked quite well
     v.n_flux = v.n_flux + (v.reactivity - v.power_defect)
+
     -- non-negativity check: 
     if v.n_flux < 0 then v.n_flux = 0 end
+
     -- non-zero flow check: 
     if v.flow_1 == 0 then v.flow_1 = 0.01 end
+
     -- then the the following won't devide by 0: 
+    -- The nominal thermal power is around 3000 MWh corresponding to a temperature of 350°C and a primary flow of 16 m3/s
     v.temperature = v.T_cold + v.thermal_power * 1000000 / v.flow_1 / 4180
-    --The nominal thermal power is around 3000 MWh corresponding to a temperature of 350°C and a primary flow of 16 m3/s
+
+    v.T_cold = 0.8 * v.temperature
+    v.thermal_power = v.n_flux * 30 -- linear 100% = 3000 Mwh
+    
 end
 
 
